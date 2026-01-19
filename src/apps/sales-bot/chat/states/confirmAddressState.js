@@ -7,7 +7,7 @@ class ConfirmAddressState {
     const answer = input.toLowerCase();
 
     if (answer === "sim" || answer === "s") {
-      console.log("Perfeito. Estamos verificando a viabilidade na região");
+      console.log("Perfeito. Iremos verificar a viabilidade em sua região");
       return "CHECK_VIABILITY";
     }
 
