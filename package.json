@@ -16,10 +16,11 @@
     "url": "https://github.com/lucasmpratesdev/chatbot-state-machine/issues"
   },
   "homepage": "https://github.com/lucasmpratesdev/chatbot-state-machine#readme",
-  "description": "",
+  "description": "Chatbot corporativo baseado em máquina de estados que simula um fluxo real de vendas,\r com integração a APIs públicas, validação de dados e geração de logs estruturados para BI.",
   "dependencies": {
     "axios": "^1.13.2",
     "dotenv": "^17.2.3",
+    "express": "^5.2.1",
     "node-fetch": "^3.3.2",
     "winston": "^3.19.0"
   }

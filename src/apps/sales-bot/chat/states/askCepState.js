@@ -4,11 +4,13 @@ class AskCepState {
   }
 
   async execute(input) {
-    const cep = input.replace(/\D/g, "");
+    const cep = (input || "").replace(/\D/g, "");
 
     if (cep.length !== 8) {
-      console.log("CEP inválido. Digite apenas números (8 dígitos).");
-      return "ASK_CEP";
+      return {
+        nextState: "ASK_CEP",
+        message: "CEP inválido. Digite apenas números (8 dígitos)."
+      };
     }
 
     try {
@@ -17,16 +19,15 @@ class AskCepState {
       this.context.session.cep = cep;
       this.context.session.address = address;
 
-      console.log("Endereço encontrado:");
-      console.log(
-        `${address.street}, ${address.district} - ${address.city}/${address.state}`
-      );
-      console.log("Esse endereço está correto? (sim/não)");
-
-      return "CONFIRM_ADDRESS";
+      return {
+        nextState: "CONFIRM_ADDRESS",
+        message: `Endereço encontrado:\n${address.street}, ${address.district} - ${address.city}/${address.state}\nEsse endereço está correto? (sim/não)`
+      };
     } catch (err) {
-      console.log("Erro ao consultar CEP. Tente novamente.");
-      return "ASK_CEP";
+      return {
+        nextState: "ASK_CEP",
+        message: "Erro ao consultar CEP. Tente novamente."
+      };
     }
   }
 }

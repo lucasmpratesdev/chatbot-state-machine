@@ -6,6 +6,8 @@ const SelectPlanState = require("./states/selectPlanState");
 const AskCpfState = require("./states/askCpfState");
 const CreditCheckState = require("./states/creditCheckState");
 const FinishState = require("./states/finishState");
+const RestartState = require("./states/restartState");
+
 
 
 class StateMachine {
@@ -19,16 +21,21 @@ class StateMachine {
       SELECT_PLAN: new SelectPlanState(context),
       ASK_CPF: new AskCpfState(context),
       CREDIT_CHECK: new CreditCheckState(context),
-      FINISH: new FinishState(context)
+      FINISH: new FinishState(context),
+      RESTART: new RestartState(context)
     };
     this.currentState = "START";
   }
 
-  async handle(input) {
-    const state = this.states[this.currentState];
-    const nextState = await state.execute(input);
-    this.currentState = nextState;
-  }
+async handle(input) {
+  const state = this.states[this.currentState];
+  const result = await state.execute(input);
+
+  if (!result) return null;
+
+  this.currentState = result.nextState;
+  return result.message;
+}
 }
 
 module.exports = StateMachine;

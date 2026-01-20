@@ -4,10 +4,10 @@ class StartState {
   }
 
   async execute() {
-    console.log("Bem-vindo ao atendimento de vendas!");
-    console.log("Para começar, informe seu CEP:");
-
-    return "ASK_CEP";
+    return {
+      nextState: "ASK_CEP",
+      message: "Bem-vindo ao atendimento de vendas!\nPara começar, informe seu CEP:"
+    };
   }
 }
 

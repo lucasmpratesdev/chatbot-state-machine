@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sales Bot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #eee;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #app {
+      width: 100%;
+      max-width: 500px;
+      background: #1a1a1a;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    #chat {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+    }
+
+    .bot {
+      color: #00ff9c;
+      margin-bottom: 8px;
+    }
+
+    .user {
+      color: #4da6ff;
+      text-align: right;
+      margin-bottom: 8px;
+    }
+
+    #input-area {
+      display: flex;
+      border-top: 1px solid #333;
+    }
+
+    #input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+      background: #222;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    #send {
+      padding: 10px 15px;
+      background: #00ff9c;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #send:hover {
+      background: #00cc7a;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="chat"></div>
+    <div id="input-area">
+      <input id="input" placeholder="Digite aqui..." />
+      <button id="send">Enviar</button>
+    </div>
+  </div>
+
+  <script src="client.js"></script>
+</body>
+</html>

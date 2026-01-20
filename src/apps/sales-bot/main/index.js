@@ -16,3 +16,5 @@ const bot = new StateMachine(context);
     await bot.handle(input);
   });
 })();
+
+module.exports = { stateMachine };

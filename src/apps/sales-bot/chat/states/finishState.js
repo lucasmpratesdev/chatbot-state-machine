@@ -3,19 +3,31 @@ class FinishState {
     this.context = context;
   }
 
-  async execute() {
-    const { address, plan, cpf, creditApproved } = this.context.session;
+async execute() {
+  const { session, salesRepository, metrics, logger } = this.context;
 
-    console.log("=== RESUMO DA VENDA ===");
-    console.log("Endereço:", address);
-    console.log("Plano:", plan);
-    console.log("CPF:", cpf);
-    console.log("Crédito aprovado:", creditApproved ? "Sim" : "Não");
-    console.log("=======================");
-    console.log("Atendimento finalizado. Obrigado!");
+  const sale = {
+    address: session.address,
+    plan: session.plan,
+    cpf: session.cpf,
+    creditApproved: session.creditApproved,
+    viability: session.viability,
+    timestamp: new Date().toISOString()
+  };
 
-    process.exit(0);
-  }
+  await salesRepository.save(sale);
+  metrics.recordSale(session.plan, session.creditApproved);
+  logger.info("Venda finalizada", sale);
+
+  return {
+    nextState: "RESTART",
+    message:
+      `=== RESUMO DA VENDA ===\n` +
+      `Plano: ${sale.plan}\nCPF: ${sale.cpf}\n` +
+      `Crédito aprovado: ${sale.creditApproved ? "Sim" : "Não"}\n\n` +
+      `Deseja realizar uma nova compra? (sim/não)`
+  };
+}
 }
 
 module.exports = FinishState;

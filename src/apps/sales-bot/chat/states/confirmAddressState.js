@@ -3,24 +3,30 @@ class ConfirmAddressState {
     this.context = context;
   }
 
-  async execute(input) {
-    const answer = input.toLowerCase();
+async execute(input) {
+  const answer = input.toLowerCase();
 
-    if (answer === "sim" || answer === "s") {
-      console.log("Perfeito. Iremos verificar a viabilidade em sua região");
-      return "CHECK_VIABILITY";
-    }
-
-    if (answer === "não" || answer === "nao" || answer === "n") {
-      console.log("Sem problema. Informe o CEP novamente:");
-      this.context.session.cep = null;
-      this.context.session.address = null;
-      return "ASK_CEP";
-    }
-
-    console.log("Responda apenas com sim ou não.");
-    return "CONFIRM_ADDRESS";
+  if (answer === "sim" || answer === "s") {
+    return {
+      nextState: "CHECK_VIABILITY",
+      message: "Perfeito. Verificando viabilidade..."
+    };
   }
+
+  if (answer === "não" || answer === "nao" || answer === "n") {
+    this.context.session.cep = null;
+    this.context.session.address = null;
+    return {
+      nextState: "ASK_CEP",
+      message: "Sem problema. Informe o CEP novamente:"
+    };
+  }
+
+  return {
+    nextState: "CONFIRM_ADDRESS",
+    message: "Responda apenas com sim ou não."
+  };
+}
 }
 
 module.exports = ConfirmAddressState;
