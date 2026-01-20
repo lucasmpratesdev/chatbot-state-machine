@@ -4,30 +4,39 @@ class SelectPlanState {
   }
 
   async execute(input) {
-    if (!input) {
-      console.log("Temos os seguintes planos:");
-      console.log("1 - Básico (100MB)");
-      console.log("2 - Intermediário (300MB)");
-      console.log("3 - Premium (600MB)");
-      console.log("Digite o número do plano:");
-      return "SELECT_PLAN";
-    }
-
     const plans = {
       "1": "Básico",
       "2": "Intermediário",
       "3": "Premium"
     };
 
-    if (!plans[input]) {
-      console.log("Plano inválido. Escolha 1, 2 ou 3.");
-      return "SELECT_PLAN";
+    if (!input) {
+      return {
+        nextState: "SELECT_PLAN",
+        message:
+          "Temos os seguintes planos:\n" +
+          "1 - Básico (100MB)\n" +
+          "2 - Intermediário (300MB)\n" +
+          "3 - Premium (600MB)\n" +
+          "Digite o número do plano:"
+      };
     }
 
-    this.context.session.plan = plans[input];
-    console.log(`Plano selecionado: ${plans[input]}`);
-    console.log("Agora, informe seu CPF para análise de crédito:");
-    return "ASK_CPF";
+    const plan = plans[input.trim()];
+
+    if (!plan) {
+      return {
+        nextState: "SELECT_PLAN",
+        message: "Plano inválido. Escolha 1, 2 ou 3."
+      };
+    }
+
+    this.context.session.plan = plan;
+
+    return {
+      nextState: "ASK_CPF",
+      message: `Plano selecionado: ${plan}\nAgora, informe seu CPF para análise de crédito:`
+    };
   }
 }
 

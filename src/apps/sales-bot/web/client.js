@@ -10,10 +10,7 @@ function addMessage(text, cls) {
   chat.scrollTop = chat.scrollHeight;
 }
 
-async function sendMessage() {
-  const msg = input.value.trim();
-  if (!msg) return;
-
+async function sendMessage(msg) {
   addMessage(msg, "user");
   input.value = "";
 
@@ -26,16 +23,25 @@ async function sendMessage() {
 
     const data = await res.json();
     addMessage(data.response || "Erro no servidor", "bot");
+
+    // Se a mensagem do bot requer input do usuário, envie automaticamente
+    if (data.response && data.response.includes("Informe")) {
+      setTimeout(() => {
+        input.value = "sim"; // ou outro valor padrão, se aplicável
+        sendMessage(input.value);
+      }, 1000); // delay para simular input
+    }
+
   } catch (err) {
     addMessage("Erro ao conectar com o servidor", "bot");
   }
 }
 
-sendBtn.addEventListener("click", sendMessage);
+sendBtn.addEventListener("click", () => sendMessage(input.value));
 
 input.addEventListener("keydown", e => {
   if (e.key === "Enter") {
-    sendMessage();
+    sendMessage(input.value);
   }
 });
 

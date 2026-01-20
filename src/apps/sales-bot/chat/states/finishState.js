@@ -19,10 +19,16 @@ async execute() {
   metrics.recordSale(session.plan, session.creditApproved);
   logger.info("Venda finalizada", sale);
 
+  const addressText = sale.address
+  ? `${sale.address.street}, ${sale.address.district} - ${sale.address.city}/${sale.address.state}`
+  : "Não informado";
+
+  
   return {
     nextState: "RESTART",
     message:
       `=== RESUMO DA VENDA ===\n` +
+      `Endereço: ${addressText}\n` +
       `Plano: ${sale.plan}\nCPF: ${sale.cpf}\n` +
       `Crédito aprovado: ${sale.creditApproved ? "Sim" : "Não"}\n\n` +
       `Deseja realizar uma nova compra? (sim/não)`
