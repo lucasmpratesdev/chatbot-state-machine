@@ -10,13 +10,13 @@ async execute() {
   if (!result.viable) {
     return {
       nextState: "ASK_CEP",
-      message: `❌ ${result.message}\nInforme o CEP novamente:`
+      message: `${result.message}\nInforme o CEP novamente:`
     };
   }
 
   return {
     nextState: "SELECT_PLAN",
-    message: `✅ Viabilidade aprovada!\nScore: ${result.regionScore}\nVamos escolher um plano.`
+    message: `Viabilidade aprovada!\nScore: ${result.regionScore}\nVamos escolher um plano.`
   };
 }
 }
