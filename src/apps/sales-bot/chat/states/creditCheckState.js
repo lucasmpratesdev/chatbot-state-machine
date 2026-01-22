@@ -9,7 +9,7 @@ async execute() {
 
   return {
     nextState: "FINISH",
-    message: approved ? "Crédito aprovado!" : "Crédito não aprovado."
+    message: approved ? "Crédito aprovado!\n" : "Crédito não aprovado.\n"
   };
 }
 }

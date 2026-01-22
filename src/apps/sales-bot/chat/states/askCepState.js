@@ -21,7 +21,7 @@ class AskCepState {
 
       return {
         nextState: "CONFIRM_ADDRESS",
-        message: `Endereço encontrado:\n${address.street}, ${address.district} - ${address.city}/${address.state}\nEsse endereço está correto? (sim/não)`
+        message: `Endereço encontrado:\n\n${address.street}, ${address.district} - ${address.city}/${address.state}\n\nEsse endereço está correto? (sim/não)`
       };
     } catch (err) {
       return {

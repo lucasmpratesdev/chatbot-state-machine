@@ -16,7 +16,7 @@ async execute() {
 
   return {
     nextState: "SELECT_PLAN",
-    message: `Viabilidade aprovada!\nScore: ${result.regionScore}\nVamos escolher um plano.`
+    message: `Viabilidade aprovada!\nScore: ${result.regionScore}\n\nVamos escolher um plano.`
   };
 }
 }

@@ -14,10 +14,10 @@ class SelectPlanState {
       return {
         nextState: "SELECT_PLAN",
         message:
-          "Temos os seguintes planos:\n" +
+          "Temos os seguintes planos:\n\n" +
           "1 - Básico (100MB)\n" +
           "2 - Intermediário (300MB)\n" +
-          "3 - Premium (600MB)\n" +
+          "3 - Premium (600MB)\n\n" +
           "Digite o número do plano:"
       };
     }
@@ -35,7 +35,7 @@ class SelectPlanState {
 
     return {
       nextState: "ASK_CPF",
-      message: `Plano selecionado: ${plan}\nAgora, informe seu CPF para análise de crédito:`
+      message: `Plano selecionado: ${plan}\n\nAgora, informe seu CPF para análise de crédito:`
     };
   }
 }

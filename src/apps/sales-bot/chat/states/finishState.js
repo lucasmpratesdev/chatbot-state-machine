@@ -27,7 +27,7 @@ async execute() {
   return {
     nextState: "RESTART",
     message:
-      `=== RESUMO DA VENDA ===\n` +
+      `=== RESUMO DA VENDA ===\n\n` +
       `Endereço: ${addressText}\n` +
       `Plano: ${sale.plan}\nCPF: ${sale.cpf}\n` +
       `Crédito aprovado: ${sale.creditApproved ? "Sim" : "Não"}\n\n` +
