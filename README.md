@@ -21,4 +21,8 @@ Start → CEP → Confirma Endereço → Viabilidade → Plano → CPF → Créd
 ## Como Executar
 npm install 
 
+Executar via terminal (CLI)
 node src/apps/sales-bot/main/index.js
+
+Executar com interface web
+node src/apps/sales-bot/main/webserver.js

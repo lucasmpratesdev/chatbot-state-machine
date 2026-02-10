@@ -6,7 +6,7 @@ class ViaCepProvider {
     const url = `${apis.viacep.baseUrl}/${cep}/json`;
 
     const response = await axios.get(url, {
-      timeout: 5000
+      timeout: 10000
     });
 
     if (response.data.erro) {
